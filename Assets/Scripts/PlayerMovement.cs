@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
     public float groundDistance = 0.1f;
     [SerializeField] LayerMask groundMask;
+    [SerializeField] LayerMask pickupMask;
 
     Vector3 moveDirection;
     Vector3 slopeMoveDirection;
@@ -103,8 +104,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, yGround, 0), groundDistance, groundMask);
-        
+        isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, yGround, 0), groundDistance, groundMask) || Physics.CheckSphere(transform.position - new Vector3(0, yGround, 0), groundDistance, pickupMask);
 
         myInput();
         controlDrag();
