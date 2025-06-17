@@ -39,8 +39,8 @@ public class SpellManager : MonoBehaviour
     [Header("Sliders")]
     public Slider manaSlider;
 
-    private bool fireballSelected = false; // Фаербол выбран или нет
-    private bool rainSelected = false;
+    public bool fireballSelected = false; // Фаербол выбран или нет
+    public bool rainSelected = false;
     private float currentMana;
     private float fireballCooldownTimer = 0f;
     private float rainCooldownTimer = 0f;

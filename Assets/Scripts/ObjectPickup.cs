@@ -18,6 +18,10 @@ public class ObjectPickup : MonoBehaviour
     private Rigidbody heldObject;
     public bool isHolding => heldObject != null;
 
+    public SpellManager spellManager;
+
+    private int selectedWeapon = 0;
+
     
 
     void Update()
@@ -58,6 +62,7 @@ public class ObjectPickup : MonoBehaviour
             Rigidbody rb = hit.collider.attachedRigidbody;
             if (rb != null)
             {
+                WasWeaponSelected();
                 heldObject = rb;
                 heldObject.useGravity = false;
                 heldObject.linearDamping = 0.5f;
@@ -72,6 +77,10 @@ public class ObjectPickup : MonoBehaviour
             heldObject.useGravity = true;
             heldObject.linearDamping = 0.1f;
             heldObject = null;
+            if (selectedWeapon > 0)
+            {
+                ReturnSelectedWeapon();
+            }
         }
     }
 
@@ -83,7 +92,38 @@ public class ObjectPickup : MonoBehaviour
             heldObject.linearDamping = 0.1f;
             heldObject.AddForce(playerCamera.transform.forward * throwForce);
             heldObject = null;
+            if (selectedWeapon > 0)
+            {
+                ReturnSelectedWeapon();
+            }
         }
         
+    }
+
+    void WasWeaponSelected()
+    {
+        if (spellManager.fireballSelected)
+        {
+            selectedWeapon = 1;
+        }
+        else if (spellManager.rainSelected)
+        {
+            selectedWeapon = 2;
+        }
+        else
+        { selectedWeapon = 0; }
+    }
+
+    void ReturnSelectedWeapon()
+    {
+        switch (selectedWeapon)
+        {
+            case 1:
+                spellManager.fireballSelected = true;
+                break;
+            case 2:
+                spellManager.rainSelected = true;
+                break;
+        }
     }
 }
