@@ -16,7 +16,9 @@ public class ObjectPickup : MonoBehaviour
     public Camera playerCamera;
 
     private Rigidbody heldObject;
-    private bool isHolding => heldObject != null;
+    public bool isHolding => heldObject != null;
+
+    
 
     void Update()
     {

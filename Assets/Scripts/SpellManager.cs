@@ -46,6 +46,8 @@ public class SpellManager : MonoBehaviour
     private float rainCooldownTimer = 0f;
     private AudioSource audioSource;
 
+    public ObjectPickup isPickup;
+
     void Start()
     {
         currentMana = maxMana;
@@ -59,6 +61,7 @@ public class SpellManager : MonoBehaviour
         UpdateCooldown();
         HandleCastInput();
         UpdateUI();
+        PickUpCheck();
         
     }
 
@@ -155,6 +158,15 @@ public class SpellManager : MonoBehaviour
             Destroy(sparkles, 0.5f);
         }
 
+    }
+
+    void PickUpCheck()
+    {
+        if (isPickup.isHolding)
+        {
+            rainSelected = false;
+            fireballSelected = false;
+        }
     }
 
     void RegenerateMana()

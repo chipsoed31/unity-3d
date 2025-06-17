@@ -372,6 +372,7 @@ MonoBehaviour:
   sparklesPrefab: {fileID: 4870038054944613798, guid: 3487f0fe1385cd34a9dbb1df00ed4b2f, type: 3}
   lightningMaxDistance: 100
   manaSlider: {fileID: 313905222}
+  isPickup: {fileID: 1647980517}
 --- !u!4 &292306044 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4798683493696154290, guid: d3d9884a02391974dab5893b39439e26, type: 3}
@@ -2797,6 +2798,7 @@ MonoBehaviour:
   pickupRange: 2.5
   holdDistance: 2
   moveForce: 400
+  throwForce: 500
   pickupLayer:
     serializedVersion: 2
     m_Bits: 64
