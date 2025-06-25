@@ -2,7 +2,7 @@
 - Project name: 3d
 - Unity version: Unity 6000.0.48f1
 - Active game object:
-  - Name: RectBox
+  - Name: Player
   - Tag: Untagged
-  - Layer: Pickup
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7723607981739068916}
   m_Layer: 6
   m_Name: Bottle6_2K
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
