@@ -19,6 +19,7 @@ public class ObjectPickup : MonoBehaviour
     public LayerMask pickupLayer;
 
     [Header("References")]
+    public Transform grabPoint;
     public Transform holdPoint;
     public Camera playerCamera;
 
@@ -31,7 +32,7 @@ public class ObjectPickup : MonoBehaviour
 
     private GameObject takenItem;
 
-    public Transform grabPoint;
+    
 
     void Update()
     {
@@ -58,6 +59,18 @@ public class ObjectPickup : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G) && takenItem != null)
         {
             PutItem();
+        }
+
+        if (takenItem != null)
+        {
+            //takenItem.transform.SetParent(grabPoint);
+            //takenItem.transform.localPosition = Vector3.zero;
+            //takenItem.transform.localRotation = Quaternion.identity;
+            
+            // сразу ставим туда позицию
+            takenItem.transform.position = grabPoint.position;
+            // и подгоняем поворот, если нужно
+            takenItem.transform.rotation = grabPoint.rotation;
         }
     }
 
@@ -140,9 +153,7 @@ public class ObjectPickup : MonoBehaviour
 
                     takenItem = hit.collider.gameObject;
 
-                    takenItem.transform.SetParent(grabPoint);
-                    takenItem.transform.localPosition = Vector3.zero;
-                    takenItem.transform.localRotation = Quaternion.identity;
+                    
                 }
             }
         }
