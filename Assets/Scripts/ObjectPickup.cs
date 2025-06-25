@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class ObjectPickup : MonoBehaviour
 {
+    [Header("Binds")]
+    public string takeKey = "Q";
+    public string fastPutInventory = "Alt";
+    public string pickupKey = "E";
+    public string putKey = "G";
+    //public string throwObjectKey = "Alt";
+
     [Header("Pickup Settings")]
     public float pickupRange = 5f;
     public float holdDistance = 2f;
@@ -22,7 +29,9 @@ public class ObjectPickup : MonoBehaviour
 
     private int selectedWeapon = 0;
 
-    
+    private GameObject takenItem;
+
+    public Transform grabPoint;
 
     void Update()
     {
@@ -37,6 +46,18 @@ public class ObjectPickup : MonoBehaviour
         {
             if (isHolding)
                 ThrowObject();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (takenItem == null)
+                TryTake();
+            //else
+            //    PutInInventory();
+        }
+        if (Input.GetKeyDown(KeyCode.G) && takenItem != null)
+        {
+            PutItem();
         }
     }
 
@@ -98,6 +119,57 @@ public class ObjectPickup : MonoBehaviour
             }
         }
         
+    }
+
+    void TryTake()
+    {
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, pickupRange, pickupLayer))
+        {
+            if (hit.collider.CompareTag("Pickable"))
+            {
+                Rigidbody rb = hit.collider.attachedRigidbody;
+
+                if (rb != null)
+                {
+                    spellManager.rainSelected = false;
+                    spellManager.fireballSelected = false;
+                    rb.useGravity = false;
+                    rb.isKinematic = true;
+                    rb.detectCollisions = false;
+
+                    takenItem = hit.collider.gameObject;
+
+                    takenItem.transform.SetParent(grabPoint);
+                    takenItem.transform.localPosition = Vector3.zero;
+                    takenItem.transform.localRotation = Quaternion.identity;
+                }
+            }
+        }
+    }
+    
+    void PutItem()
+    {
+        if (takenItem != null)
+        {
+            Rigidbody rb = takenItem.GetComponent<Rigidbody>();
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            rb.detectCollisions = true;
+            Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+            if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+            {
+                takenItem.transform.SetParent(null);
+                takenItem.transform.position = hit.point;
+
+                takenItem = null;
+            }
+            else
+            {
+                takenItem.transform.SetParent(null);
+                takenItem = null;
+            } 
+        }
     }
 
     void WasWeaponSelected()

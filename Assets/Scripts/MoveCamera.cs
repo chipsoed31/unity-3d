@@ -13,7 +13,7 @@ public class MoveCamera : MonoBehaviour
         heightOffset = initialOffset.y;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         // сохран€ем X и Z смещени€ неизменными, а Y Ч из heightOffset
         Vector3 newPos = cameraPos.position + new Vector3(initialOffset.x, heightOffset-2.0f, initialOffset.z);

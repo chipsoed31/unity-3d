@@ -28,7 +28,7 @@ public class OutlineOnHover : MonoBehaviour
             Renderer rend = hit.collider.GetComponent<Renderer>();
 
             // если под курсором объект с нужным тегом
-            if (rend != null && hit.collider.CompareTag(interactableTag))
+            if (rend != null && hit.collider.CompareTag(interactableTag) || hit.collider.CompareTag("Pickable"))
             {
                 if (currentHovered != rend)
                 {

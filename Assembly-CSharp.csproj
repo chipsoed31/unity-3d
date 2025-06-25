@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\MoveCamera.cs" />
     <Compile Include="Assets\Scripts\SpellManager.cs" />
     <Compile Include="Assets\Scripts\FireballProjectile.cs" />
+    <Compile Include="Assets\Scripts\ObjectTake.cs" />
     <Compile Include="Assets\Scripts\ObjectPickup.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\OutlineOnHover.cs" />
